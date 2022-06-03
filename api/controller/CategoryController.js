@@ -11,6 +11,21 @@ exports.getAllCategories = async (req, res) => {
     })
 }
 
+//Get Single Category
+exports.getSingleCategory = async (req, res) => {
+    const category = await Category.findById(req.params.id)
+
+    if (!category) {
+        return res.status(404).json({
+            message: 'Category not found'
+        })
+    }
+
+    res.status(200).json({
+        category
+    })
+}
+
 //create Category --> Admin
 exports.createCategory = catchAsyncErrors(async (req, res, next) => {
     const category = await Category.create(req.body)

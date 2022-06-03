@@ -7,7 +7,7 @@ import TopTotalAdmin from '../../../Components/Admin/DashboardCpn/TopTotal/TopTo
 import './style.css'
 
 const DashboardAdmin = () => {
-    const { listOrders, loading, error } = useSelector(
+    const { listOrders, isLoading, error } = useSelector(
         state => state.getAllOrdersAdmin
     )
     const { listProducts } = useSelector(state => state.getAllProductsAdmin)
@@ -25,7 +25,7 @@ const DashboardAdmin = () => {
                 <div className="card mb-4 shadow-sm">
                     <LatestOrderAdmin
                         listOrders={listOrders}
-                        loading={loading}
+                        loading={isLoading}
                         error={error}
                     />
                 </div>

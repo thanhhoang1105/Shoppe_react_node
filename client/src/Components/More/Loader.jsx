@@ -5,7 +5,7 @@ import './Loading.scss'
 const Loading = () => {
     return (
         <div className="loading">
-            <div class="google-loader">
+            <div className="google-loader">
                 <span className="google-loader-icon"></span>
                 <span className="google-loader-icon"></span>
                 <span className="google-loader-icon"></span>

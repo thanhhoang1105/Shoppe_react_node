@@ -1,6 +1,7 @@
 const express = require('express')
 const {
     getAllCategories,
+    getSingleCategory,
     createCategory,
     updateCategory,
     deleteCategory
@@ -16,6 +17,7 @@ router
 
 router
     .route('/admin/category/:id')
+    .get(isAuthenticatedUser, authorizeRoles('admin'), getSingleCategory)
     .put(isAuthenticatedUser, authorizeRoles('admin'), updateCategory)
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteCategory)
 

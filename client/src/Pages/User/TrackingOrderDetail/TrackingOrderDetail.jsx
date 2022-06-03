@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Rate } from 'antd'
+import { Rate, message } from 'antd'
 import moment from 'moment'
 
 import Formatter from '../../../Components/More/Formatter'
+import { getOrderDetails } from '../../../Redux/Actions/OrderActions'
 import './style.css'
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful']
 
-const OrderUpdate = () => {
+const TrackingOrderDetail = () => {
     const dispatch = useDispatch()
+    const { id } = useParams()
 
-    const imageUrl =
-        'https://res.cloudinary.com/shopecommerceonline/image/upload/v1654023807/products/giay-nike-air-jordan-1-retro-high-og-court-purple-2-0-555088-500-phoi-mau-size-43-61076e12e573e-02082021110122_lbxftg.jpg'
+    const { order, success } = useSelector(state => state.getOrderDetail)
 
-    const { order, error, loading } = useSelector(
-        state => state.getOrderDetails
-    )
+    const [value, setValue] = useState(1)
 
-    // let totalAllPrice = order.reduce((a, c) => a + c.price * c.quantity, 0)
     const subtotal = order?.totalPrice
-    const shippingCharges = 100000
+    const shippingCharges = 0
     const totalAllPrice = subtotal + shippingCharges
 
-    // console.log('totalAllPrice', totalAllPrice)
-    // console.log('totalPrice', totalPrice)
+    useEffect(() => {
+        if (!success) {
+            dispatch(getOrderDetails(id))
+        }
+    }, [dispatch, id, success])
+
+    const handleUpdateReview = value => {}
+
     // console.log('order', order)
+
     return (
         <section className="content-main" style={{ maxWidth: '1200px' }}>
             <form /* onSubmit={submitHandler} */>
@@ -39,9 +45,9 @@ const OrderUpdate = () => {
                                     <div className="Order-top-left">
                                         Địa Chỉ Nhận Hàng:{' '}
                                         {order?.shippingInfo?.address},{' '}
-                                        {order?.shippingInfo?.province},{' '}
-                                        {order?.shippingInfo?.district},{' '}
                                         {order?.shippingInfo?.ward},
+                                        {order?.shippingInfo?.district},{' '}
+                                        {order?.shippingInfo?.province},{' '}
                                     </div>
                                     <div className="Order-top-right">
                                         <div className="Order-top-right-item">
@@ -62,13 +68,15 @@ const OrderUpdate = () => {
                                     <div className="Order-bottom-right_details">
                                         <div className="Order-bottom-right-item_details">
                                             Thời gian tạo:{' '}
-                                            {moment(order.createdAt).calendar()}
+                                            {/* {moment(order.createdAt).format(
+                                                'llll'
+                                            )} */}
                                         </div>
                                         <div className="Order-bottom-right-item_details">
                                             Thời gian đánh giá:{' '}
-                                            {moment(
-                                                order.deliveredAt
-                                            ).calendar()}
+                                            {/* {moment(order.deliveredAt).format(
+                                                'llll'
+                                            )} */}
                                         </div>
                                     </div>
                                 </div>
@@ -76,11 +84,16 @@ const OrderUpdate = () => {
                             <div className="card-body">
                                 <div className="Order-top">
                                     <div className="Order-top-left">
-                                        ID: {order._id}
+                                        ID: {order?._id}
                                     </div>
                                     <div className="Order-top-right">
                                         <div className="Order-top-right-item">
-                                            Giao hàng thành công
+                                            {/* {order.orderStatus === 'Processing'
+                                                ? 'Chờ xác nhận'
+                                                : order.orderStatus ===
+                                                  'Shipped'
+                                                ? 'Đang giao hàng'
+                                                : 'Đã giao hàng'} */}
                                         </div>
                                         <div className="Order-top-right-center"></div>
                                         <div className="Order-top-right-item">
@@ -113,12 +126,6 @@ const OrderUpdate = () => {
                                         <div className="Order-center-right">
                                             <div className="Order-center-right-item">
                                                 {Formatter.format(item?.price)}
-                                            </div>
-                                            <div className="Order-center-right-item">
-                                                <Rate
-                                                    disabled
-                                                    defaultValue={2}
-                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -159,9 +166,44 @@ const OrderUpdate = () => {
                         </div>
                     </div>
                 </div>
+                <div className="mb-4">
+                    <div className="">
+                        <div className="card mb-4 shadow-sm">
+                            <div className="card-body">
+                                <div className="Order-top_details_button">
+                                    <div className="Order-top-right-item_button">
+                                        <span>
+                                            <Rate
+                                                tooltips={desc}
+                                                onChange={setValue}
+                                                value={value}
+                                            />
+                                            {value ? (
+                                                <span className="ant-rate-text">
+                                                    {desc[value - 1]}
+                                                </span>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary"
+                                            onClick={() =>
+                                                handleUpdateReview(order._id)
+                                            }
+                                        >
+                                            Change
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </section>
     )
 }
 
-export default OrderUpdate
+export default TrackingOrderDetail
