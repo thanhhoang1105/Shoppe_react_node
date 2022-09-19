@@ -327,6 +327,35 @@ exports.updateUserAvatar = catchAsyncErrors(async (req, res, next) => {
 //     }
 // })
 
+//Create a new account with Admin
+exports.createAccount = catchAsyncErrors(async (req, res, next) => {
+    const { name, email, role, password, avatar } = req.body
+
+    if (avatar) {
+    }
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+        folder: 'avatars',
+        width: 150,
+        crop: 'scale'
+    })
+
+    const user = await User.create({
+        name,
+        email,
+        password,
+        role,
+        avatar: {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
+    })
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
 //Get All Users --> Admin
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
     const users = await User.find()
@@ -370,13 +399,19 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-//Delete User --> Admin
+// Delete User ---Admin
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findByIdAndDelete(req.params.id)
+    const user = await User.findById(req.params.id)
+
+    const imageId = user.avatar.public_id
+
+    await cloudinary.v2.uploader.destroy(imageId)
 
     if (!user) {
-        return next(new ErrorHandler('User not found', 404))
+        return next(new ErrorHandler('User is not found with this id', 400))
     }
+
+    await user.remove()
 
     res.status(200).json({
         success: true,

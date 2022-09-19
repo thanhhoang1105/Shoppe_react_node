@@ -47,9 +47,9 @@ const LoginSignup = () => {
     }
 
     useEffect(() => {
-        if (error) {
-            message.error(error)
-        }
+        // if (error) {
+        //     message.error(error)
+        // }
 
         if (isAuthenticated) {
             message.success('Đăng nhập thành công')
@@ -124,10 +124,10 @@ const LoginSignup = () => {
                             <div>
                                 <div className="login_signUp_toggle">
                                     <p onClick={e => switchTabs(e, 'login')}>
-                                        LOGIN
+                                        Đăng nhập
                                     </p>
                                     <p onClick={e => switchTabs(e, 'register')}>
-                                        REGISTER
+                                        Đăng ký
                                     </p>
                                 </div>
                                 <button ref={switcherTab}></button>
@@ -141,7 +141,7 @@ const LoginSignup = () => {
                                     <MailOutlineIcon />
                                     <input
                                         type="email"
-                                        placeholder="Email"
+                                        placeholder="Điền Email"
                                         required
                                         value={loginEmail}
                                         onChange={e =>
@@ -153,7 +153,7 @@ const LoginSignup = () => {
                                     <LockOpenIcon />
                                     <input
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="Điền mật khẩu"
                                         required
                                         value={loginPassword}
                                         onChange={e =>
@@ -162,16 +162,13 @@ const LoginSignup = () => {
                                     />
                                 </div>
                                 <Link to="/password/forgot">
-                                    Forgot Password ?
+                                    Quên mật khẩu?
                                 </Link>
                                 <input
                                     type="submit"
-                                    value="Login"
+                                    value="Đăng nhập"
                                     className="loginBtn"
                                 />
-                                <Link to="/">
-                                    <span>Login as a guest ?</span>
-                                </Link>
                             </form>
 
                             <form
@@ -184,7 +181,7 @@ const LoginSignup = () => {
                                     <FaceIcon />
                                     <input
                                         type="text"
-                                        placeholder="Name"
+                                        placeholder="Điền tên"
                                         required
                                         name="name"
                                         value={name}
@@ -195,7 +192,7 @@ const LoginSignup = () => {
                                     <MailOutlineIcon />
                                     <input
                                         type="email"
-                                        placeholder="Email"
+                                        placeholder="Điền Email"
                                         required
                                         name="email"
                                         value={email}
@@ -206,7 +203,7 @@ const LoginSignup = () => {
                                     <LockOpenIcon />
                                     <input
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="Điền mật khẩu"
                                         required
                                         name="password"
                                         value={password}
@@ -228,7 +225,7 @@ const LoginSignup = () => {
                                 </div>
                                 <input
                                     type="submit"
-                                    value="Register"
+                                    value="Đăng ký"
                                     className="signUpBtn"
                                 />
                             </form>

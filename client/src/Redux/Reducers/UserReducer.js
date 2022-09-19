@@ -33,7 +33,23 @@ import {
     GET_ADMIN_USER_REQUEST,
     GET_ADMIN_USER_SUCCESS,
     GET_ADMIN_USER_FAILURE,
-    GET_ADMIN_USER_RESET
+    GET_ADMIN_USER_RESET,
+    GET_ADMIN_USER_DETAIL_REQUEST,
+    GET_ADMIN_USER_DETAIL_SUCCESS,
+    GET_ADMIN_USER_DETAIL_FAILURE,
+    GET_ADMIN_USER_DETAIL_RESET,
+    CREATE_ADMIN_USER_REQUEST,
+    CREATE_ADMIN_USER_SUCCESS,
+    CREATE_ADMIN_USER_FAILURE,
+    CREATE_ADMIN_USER_RESET,
+    UPDATE_ADMIN_USER_REQUEST,
+    UPDATE_ADMIN_USER_SUCCESS,
+    UPDATE_ADMIN_USER_FAILURE,
+    UPDATE_ADMIN_USER_RESET,
+    DELETE_ADMIN_USER_REQUEST,
+    DELETE_ADMIN_USER_SUCCESS,
+    DELETE_ADMIN_USER_FAILURE,
+    DELETE_ADMIN_USER_RESET
 } from '../Constants/UserConstants'
 
 //user
@@ -215,6 +231,107 @@ export const getAllUsersAdminReducer = (
                 ...state,
                 isLoading: false,
                 listUsers: []
+            }
+        default:
+            return state
+    }
+}
+
+// Get user detail Admin
+export const getUserDetailAdminReducer = (
+    state = { user: {}, isLoading: false, error: null },
+    action
+) => {
+    switch (action.type) {
+        case GET_ADMIN_USER_DETAIL_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            }
+        case GET_ADMIN_USER_DETAIL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                user: action.payload
+            }
+        case GET_ADMIN_USER_DETAIL_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case GET_ADMIN_USER_DETAIL_RESET:
+            return {
+                ...state,
+                isLoading: false,
+                user: {}
+            }
+        default:
+            return state
+    }
+}
+
+//Create new user Admin
+export const createUserAdminReducer = (state = { user: {} }, action) => {
+    switch (action.type) {
+        case CREATE_ADMIN_USER_REQUEST:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case CREATE_ADMIN_USER_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                success: true,
+                user: action.payload
+            }
+        case CREATE_ADMIN_USER_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case CREATE_ADMIN_USER_RESET:
+            return {
+                ...state,
+                isLoading: false,
+                success: false,
+                user: {}
+            }
+        default:
+            return state
+    }
+}
+
+//Delete user Admin
+export const deleteUserAdminReducer = (state = { user: {} }, action) => {
+    switch (action.type) {
+        case DELETE_ADMIN_USER_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case DELETE_ADMIN_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                user: action.payload
+            }
+        case DELETE_ADMIN_USER_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case DELETE_ADMIN_USER_RESET:
+            return {
+                ...state,
+                loading: false,
+                success: false,
+                user: {}
             }
         default:
             return state

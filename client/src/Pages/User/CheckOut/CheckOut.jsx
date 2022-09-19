@@ -77,12 +77,25 @@ const CheckOut = () => {
 
     const handleCityChange = e => {
         let provinceName = e.target.value
-        setFormData({ ...formData, province: provinceName })
+        setFormData({
+            ...formData,
+            province: provinceName
+        })
         let districtsObj = Object.values(provinces).filter(
             item => item.name === provinceName
         )[0].districts
         setDistricts(Object.values(districtsObj))
-        let wardsObj = Object.values(districtsObj)[0].wards
+    }
+
+    const handleDistrictChange = e => {
+        let districtName = e.target.value
+        setFormData({
+            ...formData,
+            district: districtName
+        })
+        let wardsObj = Object.values(districts).filter(
+            item => item.name === districtName
+        )[0].wards
         setWards(Object.values(wardsObj))
     }
 
@@ -202,14 +215,17 @@ const CheckOut = () => {
                                                         id="district"
                                                         className="input-text"
                                                         name="billing_district"
-                                                        onChange={e =>
-                                                            setFormData({
-                                                                ...formData,
-                                                                district:
-                                                                    e.target
-                                                                        .value
-                                                            })
+                                                        onChange={
+                                                            handleDistrictChange
                                                         }
+                                                        // onChange={e =>
+                                                        //     setFormData({
+                                                        //         ...formData,
+                                                        //         district:
+                                                        //             e.target
+                                                        //                 .value
+                                                        //     })
+                                                        // }
                                                         value={
                                                             formData.district
                                                         }

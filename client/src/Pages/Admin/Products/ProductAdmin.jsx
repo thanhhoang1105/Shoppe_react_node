@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { message, Select } from 'antd'
 
 import {
     getAllProductsAdmin,
+    getProductDetailAdmin,
     deleteProductAdmin
 } from '../../../Redux/Actions/ProductActions'
 
@@ -12,11 +13,12 @@ const { Option } = Select
 
 const ProductAdmin = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { listProducts } = useSelector(state => state.getAllProductsAdmin)
 
     const { listCategories } = useSelector(state => state.getAllCategoriesAdmin)
-    console.log('listCategories', listCategories)
+    // console.log('listCategories', listCategories)
 
     const { success } = useSelector(state => state.deleteProductAdmin)
 
@@ -27,6 +29,12 @@ const ProductAdmin = () => {
             dispatch({ type: 'DELETE_PRODUCT_RESET' })
         }
     }, [success, dispatch])
+
+    const handleUpdate = id => {
+        window.location.href = `/admin/product/${id}`
+        // navigate(`/admin/product/${id}`)
+        dispatch(getProductDetailAdmin(id))
+    }
 
     const handleDelete = id => {
         dispatch(deleteProductAdmin(id))
@@ -114,8 +122,11 @@ const ProductAdmin = () => {
                                         </div>
                                         <div className="row">
                                             <Link
-                                                to={`/admin/product/${product._id}`}
+                                                to=""
                                                 className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
+                                                onClick={() =>
+                                                    handleUpdate(product._id)
+                                                }
                                             >
                                                 <i className="fas fa-pen"></i>
                                             </Link>

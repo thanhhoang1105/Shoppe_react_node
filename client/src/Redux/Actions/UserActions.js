@@ -28,7 +28,19 @@ import {
     USER_RESET_PASSWORD_FAILURE,
     GET_ADMIN_USER_REQUEST,
     GET_ADMIN_USER_SUCCESS,
-    GET_ADMIN_USER_FAILURE
+    GET_ADMIN_USER_FAILURE,
+    GET_ADMIN_USER_DETAIL_REQUEST,
+    GET_ADMIN_USER_DETAIL_SUCCESS,
+    GET_ADMIN_USER_DETAIL_FAILURE,
+    CREATE_ADMIN_USER_REQUEST,
+    CREATE_ADMIN_USER_SUCCESS,
+    CREATE_ADMIN_USER_FAILURE,
+    UPDATE_ADMIN_USER_REQUEST,
+    UPDATE_ADMIN_USER_SUCCESS,
+    UPDATE_ADMIN_USER_FAILURE,
+    DELETE_ADMIN_USER_REQUEST,
+    DELETE_ADMIN_USER_SUCCESS,
+    DELETE_ADMIN_USER_FAILURE
 } from '../Constants/UserConstants'
 
 //login
@@ -59,7 +71,7 @@ export const logout = () => async dispatch => {
         await axios.get(`/api/v1/logout`)
 
         dispatch({ type: USER_LOGOUT_SUCCESS })
-        // localStorage.removeItem('userInfo')
+        localStorage.removeItem('userInfo')
     } catch (error) {
         dispatch({
             type: USER_LOGOUT_FAILURE,
@@ -81,7 +93,7 @@ export const register = RegisterInfo => async dispatch => {
             password: RegisterInfo.password,
             avatar: RegisterInfo.avatar
         })
-        console.log('RegisterInfo.avatar', RegisterInfo.avatar)
+        // console.log('RegisterInfo.avatar', RegisterInfo.avatar)
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data.user })
     } catch (error) {
         dispatch({
@@ -233,5 +245,50 @@ export const getAllUsersAdmin = () => async dispatch => {
         dispatch({ type: GET_ADMIN_USER_SUCCESS, payload: data.users })
     } catch (error) {
         dispatch({ type: GET_ADMIN_USER_FAILURE, payload: error })
+    }
+}
+
+//Get User Details Admin
+export const getUserDetailsAdmin = id => async dispatch => {
+    try {
+        dispatch({ type: GET_ADMIN_USER_DETAIL_REQUEST })
+
+        const { data } = await axios.get(`/api/v1/admin/user/${id}`)
+
+        dispatch({ type: GET_ADMIN_USER_DETAIL_SUCCESS, payload: data.user })
+    } catch (error) {
+        dispatch({ type: GET_ADMIN_USER_DETAIL_FAILURE, payload: error })
+    }
+}
+
+//Create user Admin
+export const createUserAdmin = createUserInfo => async dispatch => {
+    try {
+        dispatch({ type: CREATE_ADMIN_USER_REQUEST })
+
+        const { data } = await axios.post('/api/v1/admin/user/new', {
+            name: createUserInfo.name,
+            email: createUserInfo.email,
+            password: createUserInfo.password,
+            role: createUserInfo.role,
+            avatar: createUserInfo.image
+        })
+
+        dispatch({ type: CREATE_ADMIN_USER_SUCCESS, payload: data.user })
+    } catch (error) {
+        dispatch({ type: CREATE_ADMIN_USER_FAILURE, payload: error })
+    }
+}
+
+//Delete user Admin
+export const deleteUserAdmin = id => async dispatch => {
+    try {
+        dispatch({ type: DELETE_ADMIN_USER_REQUEST })
+
+        const { data } = await axios.delete(`/api/v1/admin/user/${id}`)
+
+        dispatch({ type: DELETE_ADMIN_USER_SUCCESS, payload: data.user })
+    } catch (error) {
+        dispatch({ type: DELETE_ADMIN_USER_FAILURE, payload: error })
     }
 }

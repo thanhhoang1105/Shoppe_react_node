@@ -18,7 +18,7 @@ const DashboardAdmin = () => {
         <>
             <section className="content-main">
                 <div className="content-header">
-                    <h2 className="content-title"> Dashboard </h2>
+                    <h2 className="content-title"> Trang chủ </h2>
                 </div>
                 <TopTotalAdmin orders={listOrders} products={listProducts} />
 

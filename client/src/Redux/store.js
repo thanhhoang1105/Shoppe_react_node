@@ -33,9 +33,13 @@ import {
     userDetailsReducer,
     profileReducer,
     forgotPasswordReducer,
-    getAllUsersAdminReducer
+    getAllUsersAdminReducer,
+    getUserDetailAdminReducer,
+    createUserAdminReducer,
+    deleteUserAdminReducer
 } from './Reducers/UserReducer'
 import { cartReducer } from './Reducers/CartReducer'
+import { getSlidesReducer, createSlideReducer } from './Reducers/SlideReducer'
 
 const reducer = combineReducers({
     //User
@@ -73,7 +77,13 @@ const reducer = combineReducers({
     updateCategoryAdmin: updateCategoryAdminReducer,
     deleteCategoryAdmin: deleteCategoryAdminReducer,
     //User
-    getAllUsersAdmin: getAllUsersAdminReducer
+    getAllUsersAdmin: getAllUsersAdminReducer,
+    getUserDetailsAdmin: getUserDetailAdminReducer,
+    createUserAdmin: createUserAdminReducer,
+    deleteUserAdmin: deleteUserAdminReducer,
+    //Slide
+    getAllSlidesAdmin: getSlidesReducer,
+    createSlideAdmin: createSlideReducer
 })
 
 let initialState = {

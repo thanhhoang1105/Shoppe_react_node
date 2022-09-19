@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { logout } from '../../../Redux/Actions/UserActions'
+import { message } from 'antd'
 import $ from 'jquery'
 
 const HeaderAdmin = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     useEffect(() => {
         $('[data-trigger]').on('click', function (e) {
             e.preventDefault()
@@ -21,6 +27,12 @@ const HeaderAdmin = () => {
             }
         })
     }, [])
+
+    const handleLogout = () => {
+        dispatch(logout())
+        message.success('Đăng xuất thành công')
+        window.location.href = '/auth'
+    }
 
     const Avatar =
         'https://res.cloudinary.com/shopecommerceonline/image/upload/v1654019741/shoe/24-248253_user-profile-default-image-png-clipart-png-download_fwluw2.png'
@@ -88,18 +100,12 @@ const HeaderAdmin = () => {
                             />
                         </Link>
                         <div className="dropdown-menu dropdown-menu-end">
-                            <Link className="dropdown-item" to="/">
-                                My profile
-                            </Link>
-                            <Link className="dropdown-item" to="#">
-                                Settings
-                            </Link>
                             <Link
-                                // onClick={logoutHandler}
+                                onClick={handleLogout}
                                 className="dropdown-item text-danger"
                                 to="#"
                             >
-                                Exit
+                                Đăng xuất
                             </Link>
                         </div>
                     </li>

@@ -24,7 +24,7 @@ const ProductUpdate = () => {
 
     const { listCategories } = useSelector(state => state.getAllCategoriesAdmin)
 
-    const { isUpdate, isLoading } = useSelector(
+    const { isUpdate, isLoading, error } = useSelector(
         state => state.updateProductAdmin
     )
 
@@ -34,10 +34,9 @@ const ProductUpdate = () => {
     const [description, setDescription] = useState('')
     const [stock, setStock] = useState('')
     const [images, setImages] = useState([])
-    const imagePreview =
-        'https://res.cloudinary.com/shopecommerceonline/image/upload/v1654019741/shoe/24-248253_user-profile-default-image-png-clipart-png-download_fwluw2.png'
+    const [imagePreview, setImagePreview] = useState('')
 
-    console.log(images)
+    console.log('imagePreview', imagePreview)
 
     useEffect(() => {
         setName(product.name)
@@ -46,6 +45,7 @@ const ProductUpdate = () => {
         setCategory(product.category)
         setDescription(product.description)
         setImages(product.images)
+        setImagePreview(product.images ? product.images[0].url : '')
 
         if (!success) {
             dispatch(getProductDetailAdmin(id))
@@ -54,14 +54,19 @@ const ProductUpdate = () => {
             message.success('Cập nhật thành công')
             dispatch({ type: 'UPDATE_PRODUCT_RESET' })
             navigate('/admin/products')
+            window.location.reload()
         }
-    }, [success, dispatch, id, product, isUpdate, navigate])
+        if (error) {
+            message.error(error)
+        }
+    }, [success, dispatch, id, product, isUpdate, error, navigate])
 
     const updateProfileDataChange = e => {
         const reader = new FileReader()
 
         reader.onload = () => {
             if (reader.readyState === 2) {
+                setImagePreview(reader.result)
                 setImages(reader.result)
             }
         }
@@ -76,7 +81,8 @@ const ProductUpdate = () => {
             description,
             price,
             stock,
-            category
+            category,
+            images
         }
 
         dispatch(updateProductAdmin(id, updateProductInfo))
@@ -158,7 +164,7 @@ const ProductUpdate = () => {
                                                         Danh mục
                                                     </label>
                                                     <Select
-                                                        defaultValue="Chọn danh mục"
+                                                        value={category}
                                                         style={{
                                                             width: '100%'
                                                         }}
@@ -200,15 +206,16 @@ const ProductUpdate = () => {
                                         <div className="avatar">
                                             <div className="avatar-preview">
                                                 <img
-                                                    src={
-                                                        images
-                                                            ? images.map(
-                                                                  item => {
-                                                                      return item.url
-                                                                  }
-                                                              )
-                                                            : imagePreview
-                                                    }
+                                                    // src={
+                                                    //     imagePreview
+                                                    //         ? images.map(
+                                                    //               item => {
+                                                    //                   return item.url
+                                                    //               }
+                                                    //           )
+                                                    //         : imagePreview
+                                                    // }
+                                                    src={imagePreview}
                                                     alt="avatar"
                                                     className="avatar-preview"
                                                 />

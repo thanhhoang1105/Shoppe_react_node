@@ -1,45 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { message } from 'antd'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
+import { message, Select } from 'antd'
 
-import {
-    getAllUsersAdmin,
-    getUserDetailsAdmin,
-    deleteUserAdmin
-} from '../../../Redux/Actions/UserActions'
-
-const UserAdmin = () => {
+const SlideAdmin = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const { listUsers } = useSelector(state => state.getAllUsersAdmin)
+    const { listSlides } = useSelector(state => state.getAllSlidesAdmin)
 
-    const { success } = useSelector(state => state.deleteUserAdmin)
-
-    useEffect(() => {
-        if (success) {
-            message.success('Xóa thành công')
-            dispatch(getAllUsersAdmin())
-            dispatch({ type: 'DELETE_ADMIN_USER_RESET' })
-        }
-    }, [success, dispatch])
-
-    const handleUpdate = id => {
-        dispatch(getUserDetailsAdmin(id))
-    }
-
-    const handleDelete = id => {
-        dispatch(deleteUserAdmin(id))
-    }
-
+    console.log('listSlides', listSlides)
     return (
         <section className="content-main">
             <div className="content-header">
-                <h2 className="content-title">Danh sách tài khoản</h2>
+                <h2 className="content-title">Danh sách Slide</h2>
                 <div>
-                    <Link to={`/admin/user/new`} className="btn btn-primary">
-                        Thêm mới tài khoản
+                    <Link to={`/admin/slide/new`} className="btn btn-primary">
+                        Thêm mới slide
                     </Link>
                 </div>
             </div>
@@ -51,21 +28,19 @@ const UserAdmin = () => {
                             <thead>
                                 <tr>
                                     <th>Ảnh</th>
+                                    <th>Tiêu đề</th>
                                     <th>Tên</th>
-                                    <th>Email</th>
-                                    <th>Quyền</th>
-                                    <th>Thời gian tạo</th>
+                                    <th>Mô tả</th>
                                     <th className="text-end">Action</th>
                                 </tr>
                             </thead>
-                            {/* Table Data */}
                             <tbody>
-                                {listUsers.map((item, index) => (
+                                {listSlides.map((item, index) => (
                                     <tr key={index}>
-                                        {item.avatar ? (
+                                        {item.image ? (
                                             <td>
                                                 <img
-                                                    src={item.avatar.url}
+                                                    src={item.image.url}
                                                     alt="avatar"
                                                     className="img-fluid"
                                                     style={{
@@ -86,30 +61,25 @@ const UserAdmin = () => {
                                             </td>
                                         )}
                                         <td>{item.name}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.role}</td>
-                                        <td>
-                                            {moment(item.createdAt).format(
-                                                'llll'
-                                            )}
-                                        </td>
+                                        <td>{item.title}</td>
+                                        <td>{item.description}</td>
                                         <td className="text-end">
                                             <div className="actions">
                                                 <Link
                                                     to={`/admin/user/${item._id}`}
                                                     className="text-success"
-                                                    onClick={() =>
-                                                        handleUpdate(item._id)
-                                                    }
+                                                    // onClick={() =>
+                                                    //     handleUpdate(item._id)
+                                                    // }
                                                 >
                                                     <i className="fas fa-eye"></i>
                                                 </Link>
                                                 <Link
                                                     className="text-danger"
                                                     to=""
-                                                    onClick={() => {
-                                                        handleDelete(item._id)
-                                                    }}
+                                                    // onClick={() => {
+                                                    //     handleDelete(item._id)
+                                                    // }}
                                                 >
                                                     <i className="fas fa-trash-alt"></i>
                                                 </Link>
@@ -126,4 +96,4 @@ const UserAdmin = () => {
     )
 }
 
-export default UserAdmin
+export default SlideAdmin

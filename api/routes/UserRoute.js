@@ -9,6 +9,7 @@ const {
     updateUserPassword,
     updateUserProfile,
     updateUserAvatar,
+    createAccount,
     getAllUsers,
     getSingleUserDetails,
     updateUserRole,
@@ -41,6 +42,10 @@ router.get(
     authorizeRoles('admin'),
     getAllUsers
 )
+
+router
+    .route('/admin/user/new')
+    .post(isAuthenticatedUser, authorizeRoles('admin'), createAccount)
 
 router
     .route('/admin/user/:id')
