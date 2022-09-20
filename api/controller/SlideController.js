@@ -97,15 +97,16 @@ exports.deleteSlide = catchAsyncErrors(async (req, res, next) => {
     if (!slide) {
         return next(new ErrorHandler('Slide is not found with this id', 404))
     }
-
-    for (let i = 0; i < slide.images.length; i++) {
-        await cloudinary.v2.uploader.destroy(slide.images[i].public_id)
+    if (slide.image.length > 0) {
+        const imageId = slide.images.public_id
+        await cloudinary.v2.uploader.destroy(imageId)
     }
+    console.log('slideeee',slide.image.length);
 
-    await Slide.findByIdAndDelete(req.params.id)
+    await slide.remove()
 
     res.status(200).json({
         success: true,
-        message: 'Slide deleted'
+        message: 'Slide deleted succesfully'
     })
 })

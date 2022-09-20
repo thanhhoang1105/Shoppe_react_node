@@ -191,6 +191,7 @@ export const createProductAdminReducer = (
             return {
                 ...state,
                 isLoading: false,
+                success: false,
                 error: null
             }
         default:

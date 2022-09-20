@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { message, Select, Input } from 'antd'
 
-import { createProductAdmin } from '../../../Redux/Actions/ProductActions'
+import { createProductAdmin, getAllProductsAdmin } from '../../../Redux/Actions/ProductActions'
 import Loading from '../../../Components/More/Loader'
 import './productCreate.css'
 
@@ -32,10 +32,11 @@ const ProductCreate = () => {
     useEffect(() => {
         if (success) {
             message.success('Thêm mới thành công')
-            // navigate('/admin/products')
-            window.location.href = '/admin/products'
+            navigate('/admin/products')
+            dispatch(getAllProductsAdmin())
+            dispatch({ type: 'CREATE_PRODUCT_RESET'})
         }
-    }, [success, navigate])
+    }, [success, navigate, dispatch])
 
     const updateProfileDataChange = e => {
         const reader = new FileReader()

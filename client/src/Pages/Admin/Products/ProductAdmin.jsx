@@ -1,19 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { message, Select } from 'antd'
+import { Modal } from 'antd'
 
 import {
     getAllProductsAdmin,
     getProductDetailAdmin,
     deleteProductAdmin
 } from '../../../Redux/Actions/ProductActions'
+import DialogPopup from '../../../Components/Until/DialogPopup'
 
 const { Option } = Select
 
 const ProductAdmin = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+        console.log('1');
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
     const { listProducts } = useSelector(state => state.getAllProductsAdmin)
 
@@ -144,6 +161,11 @@ const ProductAdmin = () => {
                                 </div>
                             </div>
                         ))}
+                        {/* <DialogPopup
+                            isModalOpen={isModalOpen}
+                            handleOk={handleOk}
+                            handleCancel={handleCancel}
+                        /> */}
                     </div>
 
                     <nav

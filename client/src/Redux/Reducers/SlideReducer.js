@@ -6,7 +6,11 @@ import {
     CREATE_ADMIN_SLIDE_REQUEST,
     CREATE_ADMIN_SLIDE_SUCCESS,
     CREATE_ADMIN_SLIDE_FAILURE,
-    CREATE_ADMIN_SLIDE_RESET
+    CREATE_ADMIN_SLIDE_RESET,
+    DELETE_SLIDE_REQUEST,
+    DELETE_SLIDE_SUCCESS,
+    DELETE_SLIDE_FAILURE,
+    DELETE_SLIDE_RESET
 } from '../Constants/SlideConstants'
 
 // Get slides
@@ -69,7 +73,44 @@ export const createSlideReducer = (state = {}, action) => {
                 ...state,
                 isLoading: false,
                 error: null,
+                success: false,
                 slide: {}
+            }
+        default:
+            return state
+    }
+}
+
+export const deleteSlideAdminReducer = (
+    state = { isLoading: false, error: null },
+    action
+) => {
+    switch (action.type) {
+        case DELETE_SLIDE_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            }
+        case DELETE_SLIDE_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                success: true,
+                slide: action.payload
+            }
+        case DELETE_SLIDE_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case DELETE_SLIDE_RESET:
+            return {
+                ...state,
+                isLoading: false,
+                success: false,
+                error: null
             }
         default:
             return state

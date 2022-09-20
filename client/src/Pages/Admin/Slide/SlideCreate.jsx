@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { message, Input } from 'antd'
 
 import Loading from '../../../Components/More/Loader'
 
-import { createSlide } from '../../../Redux/Actions/SlideActions'
+import { createSlide, getAllSlidesAdmin } from '../../../Redux/Actions/SlideActions'
 
 const { TextArea } = Input
 const SlideCreate = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const { success, isLoading } = useSelector(state => state.createUserAdmin)
+    const { success, isLoading } = useSelector(state => state.createSlideAdmin)
 
     const [name, setName] = useState('')
     const [title, setTitle] = useState('')
@@ -22,9 +24,11 @@ const SlideCreate = () => {
     useEffect(() => {
         if (success) {
             message.success('Thêm thành công')
-            window.location.href = '/admin/users'
+            navigate('/admin/slides')
+            dispatch(getAllSlidesAdmin())
+            dispatch({ type: 'CREATE_ADMIN_SLIDE_RESET'})
         }
-    }, [success, dispatch])
+    }, [success, navigate, dispatch])
 
     const updateProfileDataChange = e => {
         const reader = new FileReader()

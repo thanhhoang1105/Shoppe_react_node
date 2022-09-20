@@ -5,7 +5,10 @@ import {
     GET_ADMIN_SLIDE_FAILURE,
     CREATE_ADMIN_SLIDE_REQUEST,
     CREATE_ADMIN_SLIDE_SUCCESS,
-    CREATE_ADMIN_SLIDE_FAILURE
+    CREATE_ADMIN_SLIDE_FAILURE,
+    DELETE_SLIDE_REQUEST,
+    DELETE_SLIDE_SUCCESS,
+    DELETE_SLIDE_FAILURE
 } from '../Constants/SlideConstants'
 
 // Get all slides Admin
@@ -34,5 +37,20 @@ export const createSlide = createSlideInfo => async dispatch => {
         dispatch({ type: CREATE_ADMIN_SLIDE_SUCCESS, payload: data.slide })
     } catch (error) {
         dispatch({ type: CREATE_ADMIN_SLIDE_FAILURE, payload: error })
+    }
+}
+
+// Delete product Admin
+export const deleteSlideAdmin = slideId => async dispatch => {
+    try {
+        dispatch({ type: DELETE_SLIDE_REQUEST })
+
+        const { data } = await axios.delete(
+            `/api/v1/admin/slide/${slideId}`
+        )
+
+        dispatch({ type: DELETE_SLIDE_SUCCESS, payload: data.slide })
+    } catch (error) {
+        dispatch({ type: DELETE_SLIDE_FAILURE, payload: error })
     }
 }

@@ -12,6 +12,7 @@ const product = require('./routes/ProductRoute')
 const user = require('./routes/UserRoute')
 const order = require('./routes/OrderRoute')
 const category = require('./routes/CategoryRoute')
+const slide = require('./routes/SlideRoute')
 
 app.use('/api/v1', product)
 
@@ -20,6 +21,8 @@ app.use('/api/v1', user)
 app.use('/api/v1', order)
 
 app.use('/api/v1', category)
+
+app.use('/api/v1', slide)
 
 app.use(ErrorHandler)
 

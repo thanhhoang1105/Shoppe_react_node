@@ -2,14 +2,26 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { message, Select } from 'antd'
+import { deleteSlideAdmin, getAllSlidesAdmin } from '../../../Redux/Actions/SlideActions'
 
 const SlideAdmin = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const { listSlides } = useSelector(state => state.getAllSlidesAdmin)
+    const { success } = useSelector(state => state.deleteSlideAdmin)
 
-    console.log('listSlides', listSlides)
+    useEffect(() => {
+        if (success) {
+            message.success('Xóa thành công')
+            dispatch(getAllSlidesAdmin())
+            dispatch({ type: 'DELETE_SLIDE_RESET' })
+        }
+    }, [success, dispatch])
+
+    const handleDelete = id => {
+        dispatch(deleteSlideAdmin(id))
+    }
     return (
         <section className="content-main">
             <div className="content-header">
@@ -77,9 +89,9 @@ const SlideAdmin = () => {
                                                 <Link
                                                     className="text-danger"
                                                     to=""
-                                                    // onClick={() => {
-                                                    //     handleDelete(item._id)
-                                                    // }}
+                                                    onClick={() => {
+                                                        handleDelete(item._id)
+                                                    }}
                                                 >
                                                     <i className="fas fa-trash-alt"></i>
                                                 </Link>

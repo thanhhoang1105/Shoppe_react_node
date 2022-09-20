@@ -39,7 +39,11 @@ import {
     deleteUserAdminReducer
 } from './Reducers/UserReducer'
 import { cartReducer } from './Reducers/CartReducer'
-import { getSlidesReducer, createSlideReducer } from './Reducers/SlideReducer'
+import {
+    getSlidesReducer,
+    createSlideReducer,
+    deleteSlideAdminReducer
+} from './Reducers/SlideReducer'
 
 const reducer = combineReducers({
     //User
@@ -83,7 +87,8 @@ const reducer = combineReducers({
     deleteUserAdmin: deleteUserAdminReducer,
     //Slide
     getAllSlidesAdmin: getSlidesReducer,
-    createSlideAdmin: createSlideReducer
+    createSlideAdmin: createSlideReducer,
+    deleteSlideAdmin: deleteSlideAdminReducer
 })
 
 let initialState = {

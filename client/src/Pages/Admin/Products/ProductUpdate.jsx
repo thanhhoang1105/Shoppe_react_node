@@ -5,7 +5,8 @@ import { message, Select, Input } from 'antd'
 
 import {
     getProductDetailAdmin,
-    updateProductAdmin
+    updateProductAdmin,
+    getAllProductsAdmin
 } from '../../../Redux/Actions/ProductActions'
 
 import Loading from '../../../Components/More/Loader'
@@ -54,7 +55,8 @@ const ProductUpdate = () => {
             message.success('Cập nhật thành công')
             dispatch({ type: 'UPDATE_PRODUCT_RESET' })
             navigate('/admin/products')
-            window.location.reload()
+            dispatch(getAllProductsAdmin())
+            // window.location.reload()
         }
         if (error) {
             message.error(error)
