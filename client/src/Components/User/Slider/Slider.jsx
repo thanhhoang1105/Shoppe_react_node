@@ -2,6 +2,8 @@ import React from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import { useDispatch, useSelector } from 'react-redux'
+
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -16,6 +18,10 @@ import slide_2 from '../../../Assets/Images/kisspng-beats-electronics-headphones
 import slide_3 from '../../../Assets/Images/JBL_JR 310BT_Product Image_Hero_Skyblue.png'
 import slide_4 from '../../../Assets/Images/JBL_QUANTUM ONE_Product Image_Angle.png'
 const Slider = () => {
+    const { listSlides } = useSelector(state => state.getAllSlidesAdmin)
+
+    console.log('listSlides', listSlides)
+
     return (
         <>
             <Swiper
@@ -27,76 +33,21 @@ const Slider = () => {
                 className="mySwiper"
                 style={{ paddingTop: '50px' }}
             >
-                <SwiperSlide className="swiper__item">
-                    <div className="swiper__content">
-                        <span>Nike sport shoes</span>
-                        <h2>Nike metcon shoes</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Quod minus illum autem sit maxime, fugiat
-                            soluta omnis, blanditiis magnam quam obcaecati
-                            dolorum modi ipsum nesciunt est vero dignissimos
-                            dicta recusandae?
-                        </p>
-                    </div>
-                    <div className="swiper__image">
-                        <img src={slide_1} alt="slide 1" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className="swiper__item">
-                    <div className="swiper__content">
+                {listSlides.map(slide => (
+                    <SwiperSlide className="swiper__item">
                         <div className="swiper__content">
-                            <span>Nike sport shoes</span>
-                            <h2>Nike metcon shoes</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quod minus illum autem sit
-                                maxime, fugiat soluta omnis, blanditiis magnam
-                                quam obcaecati dolorum modi ipsum nesciunt est
-                                vero dignissimos dicta recusandae?
-                            </p>
+                            <span>{slide.name}</span>
+                            <h2>{slide.title}</h2>
+                            <p>{slide.description}</p>
                         </div>
-                    </div>
-                    <div className="swiper__image">
-                        <img src={slide_2} alt="slide 2" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className="swiper__item">
-                    <div className="swiper__content">
-                        <div className="swiper__content">
-                            <span>Nike sport shoes</span>
-                            <h2>Nike metcon shoes</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quod minus illum autem sit
-                                maxime, fugiat soluta omnis, blanditiis magnam
-                                quam obcaecati dolorum modi ipsum nesciunt est
-                                vero dignissimos dicta recusandae?
-                            </p>
+                        <div className="swiper__image">
+                            <img
+                                src={slide.image.url}
+                                alt={slide.image.public_id}
+                            />
                         </div>
-                    </div>
-                    <div className="swiper__image">
-                        <img src={slide_3} alt="slide 3" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className="swiper__item">
-                    <div className="swiper__content">
-                        <div className="swiper__content">
-                            <span>Nike sport shoes</span>
-                            <h2>Nike metcon shoes</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quod minus illum autem sit
-                                maxime, fugiat soluta omnis, blanditiis magnam
-                                quam obcaecati dolorum modi ipsum nesciunt est
-                                vero dignissimos dicta recusandae?
-                            </p>
-                        </div>
-                    </div>
-                    <div className="swiper__image">
-                        <img src={slide_4} alt="slide 4" />
-                    </div>
-                </SwiperSlide>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </>
     )

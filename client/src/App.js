@@ -50,6 +50,7 @@ function App() {
 
     const { user } = useSelector(state => state.getUser)
     useEffect(() => {
+        window.scrollTo(0, 0)
         //get User
         store.dispatch(loadUser())
         //get Products User
