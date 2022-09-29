@@ -832,10 +832,12 @@ footer ul li {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 }
 
 .product-img > img {
     max-width: 70%;
+    width: 300px;
 }
 
 .product-img-list {

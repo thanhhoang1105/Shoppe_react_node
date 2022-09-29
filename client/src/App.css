@@ -11,6 +11,11 @@
     --activeItem: #f799a354;
 }
 
+.ant-card-meta-description{
+    color: orange;
+    font-size: 20px;
+}
+
 .App {
     /* padding: 0.5rem 3.5rem; */
     color: var(--black);
