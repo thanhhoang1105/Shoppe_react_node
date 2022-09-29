@@ -69,7 +69,7 @@ const Footer = () => {
                         </div>
                         <div className="col_3 col-md-6 col-sm-12">
                             <div className="contact">
-                                <h3 className="contact-header">ATShop</h3>
+                                <h3 className="contact-header">Shop</h3>
                                 <ul className="contact-socials">
                                     <li>
                                         <Link to="/">

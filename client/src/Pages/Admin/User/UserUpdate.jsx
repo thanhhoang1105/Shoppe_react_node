@@ -131,7 +131,7 @@ const UserUpdate = () => {
                                                 Danh mục
                                             </label>
                                             <Select
-                                                value="Chọn danh mục"
+                                                value={role}
                                                 style={{
                                                     width: '100%'
                                                 }}

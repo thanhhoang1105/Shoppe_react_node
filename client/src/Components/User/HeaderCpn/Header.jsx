@@ -5,11 +5,13 @@ import { message } from 'antd'
 
 import { logout } from '../../../Redux/Actions/UserActions'
 import { getProducts } from '../../../Redux/Actions/ProductActions'
+import './style.css'
 
 const Header = () => {
     const dispatch = useDispatch()
 
     const { user, error } = useSelector(state => state.getUser)
+    const { cartItems } = useSelector(state => state.cart)
 
     const [keyword, setKeyword] = useState('')
 
@@ -46,14 +48,16 @@ const Header = () => {
                         <div className="top-header container">
                             <ul className="devided">
                                 <li>
-                                    <Link to="/">+840123456789</Link>
+                                    <Link to="/">+84847353454</Link>
                                 </li>
                                 <li>
-                                    <Link to="/">atshop@mail.com</Link>
+                                    <Link to="/">
+                                        thanhhoangngoc.bmt@gmail.com
+                                    </Link>
                                 </li>
                             </ul>
                             <ul className="devided">
-                                <li className="dropdown">
+                                {/* <li className="dropdown">
                                     <Link to="/">USD</Link>
                                     <i className="bx bxs-chevron-down"></i>
                                     <ul className="dropdown-content">
@@ -61,8 +65,8 @@ const Header = () => {
                                             <Link to="/">VND</Link>
                                         </li>
                                     </ul>
-                                </li>
-                                <li className="dropdown">
+                                </li> */}
+                                {/* <li className="dropdown">
                                     <Link to="/">ENGLISH</Link>
                                     <i className="bx bxs-chevron-down"></i>
                                     <ul className="dropdown-content">
@@ -70,9 +74,9 @@ const Header = () => {
                                             <Link to="/">VIETNAMESE</Link>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> */}
                                 <li>
-                                    <Link to="/orders">ORDER TRACKING</Link>
+                                    <Link to="/orders">Kiểm tra đơn hàng</Link>
                                 </li>
                             </ul>
                         </div>
@@ -80,7 +84,7 @@ const Header = () => {
                     <div className="bg-main">
                         <div className="mid-header container">
                             <Link to="/" className="logo">
-                                NTShop
+                                Shop
                             </Link>
                             <div className="search">
                                 <input
@@ -98,7 +102,13 @@ const Header = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/cart">
+                                    <Link
+                                        to="/cart"
+                                        style={{ position: 'relative' }}
+                                    >
+                                        <div className="number-card">
+                                            {cartItems?.length}
+                                        </div>
                                         <i className="bx bx-cart"></i>
                                     </Link>
                                 </li>
@@ -131,22 +141,22 @@ const Header = () => {
                         <div className="bottom-header container">
                             <ul className="main-menu">
                                 <li>
-                                    <Link to="/">home</Link>
+                                    <Link to="/">Trang chủ</Link>
                                 </li>
                                 <li>
-                                    <Link to="/products">products</Link>
+                                    <Link to="/products">Sản phẩm</Link>
                                 </li>
                                 {/* mega menu  */}
                                 <li className="mega-dropdown">
                                     <a href="true">
-                                        Shop
+                                        Danh mục
                                         <i className="bx bxs-chevron-down"></i>
                                     </a>
                                     <div className="mega-content">
                                         <div className="row">
                                             <div className="col_3 col_md_12">
                                                 <div className="box_1">
-                                                    <h3>Categories</h3>
+                                                    <h3>Danh mục</h3>
                                                     <ul>
                                                         <li>
                                                             <Link to="/">
@@ -174,7 +184,7 @@ const Header = () => {
                                             </div>
                                             <div className="col_3 col_md_12">
                                                 <div className="box_1">
-                                                    <h3>Categories</h3>
+                                                    <h3>Danh mục</h3>
                                                     <ul>
                                                         <li>
                                                             <Link to="/">
@@ -202,7 +212,7 @@ const Header = () => {
                                             </div>
                                             <div className="col_3 col_md_12">
                                                 <div className="box_1">
-                                                    <h3>Categories</h3>
+                                                    <h3>Danh mục</h3>
                                                     <ul>
                                                         <li>
                                                             <Link to="/">
@@ -230,7 +240,7 @@ const Header = () => {
                                             </div>
                                             <div className="col_3 col_md_12">
                                                 <div className="box_1">
-                                                    <h3>Categories</h3>
+                                                    <h3>Danh mục</h3>
                                                     <ul>
                                                         <li>
                                                             <Link to="/">
@@ -286,7 +296,7 @@ const Header = () => {
                                     <Link to="/">blog</Link>
                                 </li>
                                 <li>
-                                    <Link to="/">contact</Link>
+                                    <Link to="/">Kết nối</Link>
                                 </li>
                             </ul>
                         </div>

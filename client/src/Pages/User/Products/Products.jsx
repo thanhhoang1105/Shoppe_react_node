@@ -42,11 +42,11 @@ const Products = () => {
             <div className="container-1">
                 <div className="box_1">
                     <div className="breadcumb">
-                        <Link to="/">home</Link>
+                        <Link to="/">Trang chủ</Link>
                         <span>
                             <i className="bx bxs-chevrons-right"></i>
                         </span>
-                        <Link to="/products">all products</Link>
+                        <Link to="/products">Tất cả sản phẩm</Link>
                     </div>
                 </div>
                 <div className="box_1">
@@ -61,9 +61,7 @@ const Products = () => {
                                 </button>
                             </div>
                             <div className="box_1">
-                                <span className="filter-header">
-                                    Categories
-                                </span>
+                                <span className="filter-header">Danh mục</span>
                                 <ul
                                     className="filter-list"
                                     style={{ paddingLeft: '0' }}
@@ -73,7 +71,7 @@ const Products = () => {
                                             to=""
                                             onClick={() => setCategory('')}
                                         >
-                                            All Products
+                                            Tất cả sản phẩm
                                         </Link>
                                     </li>
                                     {categories.map(category => (

@@ -7,7 +7,7 @@ import moment from 'moment'
 import Formatter from '../../../Components/More/Formatter'
 import { getOrderDetails } from '../../../Redux/Actions/OrderActions'
 import './style.css'
-const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful']
+const desc = ['Tệ', 'Không hài lòng', 'Bình thường ', 'Hài lòng', 'Tuyệt vời']
 
 const TrackingOrderDetail = () => {
     const dispatch = useDispatch()
@@ -28,8 +28,6 @@ const TrackingOrderDetail = () => {
     }, [dispatch, id, success])
 
     const handleUpdateReview = value => {}
-
-    // console.log('order', order)
 
     return (
         <section className="content-main" style={{ maxWidth: '1200px' }}>
@@ -172,7 +170,7 @@ const TrackingOrderDetail = () => {
                             <div className="card-body">
                                 <div className="Order-top_details_button">
                                     <div className="Order-top-right-item_button">
-                                        <span>
+                                        <span className="rate">
                                             <Rate
                                                 tooltips={desc}
                                                 onChange={setValue}
@@ -193,7 +191,7 @@ const TrackingOrderDetail = () => {
                                                 handleUpdateReview(order._id)
                                             }
                                         >
-                                            Change
+                                            Đánh giá
                                         </button>
                                     </div>
                                 </div>

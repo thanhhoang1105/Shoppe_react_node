@@ -11,12 +11,12 @@ const Home = () => {
                 <div className="section">
                     <div className="container">
                         <div className="section-header">
-                            <h2>Latest product</h2>
+                            <h2>Sản phẩm mới nhất</h2>
                         </div>
                         <Product />
                         <div className="section-footer">
                             <a href="./products" className="btn-flat btn-hover">
-                                view all
+                                xem tất cả
                             </a>
                         </div>
                     </div>

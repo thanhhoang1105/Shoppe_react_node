@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { message, Select, Input } from 'antd'
 
-import { createUserAdmin } from '../../../Redux/Actions/UserActions'
+import {
+    createUserAdmin,
+    getAllUsersAdmin
+} from '../../../Redux/Actions/UserActions'
 import Loading from '../../../Components/More/Loader'
 
 const { Option } = Select
@@ -11,6 +14,7 @@ const { TextArea } = Input
 
 const UserCreate = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { success, isLoading } = useSelector(state => state.createUserAdmin)
 
@@ -25,9 +29,11 @@ const UserCreate = () => {
     useEffect(() => {
         if (success) {
             message.success('Thêm thành công')
-            window.location.href = '/admin/users'
+            navigate('/admin/users')
+            dispatch(getAllUsersAdmin())
+            dispatch({ type: 'CREATE_ADMIN_USER_RESET' })
         }
-    }, [success, dispatch])
+    }, [success, navigate, dispatch])
 
     const updateProfileDataChange = e => {
         const reader = new FileReader()

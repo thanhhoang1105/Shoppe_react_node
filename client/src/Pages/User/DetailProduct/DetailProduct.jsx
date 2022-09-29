@@ -57,11 +57,11 @@ const DetailProduct = () => {
                         <div className="container">
                             <div className="box_1">
                                 <div className="breadcumb">
-                                    <Link to="/">home</Link>
+                                    <Link to="/">Trang chủ</Link>
                                     <span>
                                         <i className="bx bxs-chevrons-right"></i>
                                     </span>
-                                    <Link to="/products">all products</Link>
+                                    <Link to="/products">Tất cả sản phẩm</Link>
                                     <span>
                                         <i className="bx bxs-chevrons-right"></i>
                                     </span>
@@ -111,7 +111,7 @@ const DetailProduct = () => {
                                         <h1>{product.name}</h1>
                                         <div className="product-info-detail">
                                             <span className="product-info-detail-title">
-                                                Brand:
+                                                Tên:
                                             </span>
                                             <Link
                                                 to=""
@@ -122,7 +122,7 @@ const DetailProduct = () => {
                                         </div>
                                         <div className="product-info-detail">
                                             <span className="product-info-detail-title">
-                                                Rated:
+                                                Đánh giá:
                                             </span>
                                             <Rate
                                                 allowHalf
@@ -130,7 +130,7 @@ const DetailProduct = () => {
                                                 defaultValue={product?.ratings}
                                                 style={{ padding: '0 10px' }}
                                             />
-                                            ({product.numOfReviews} Reviews)
+                                            ({product.numOfReviews} Đánh giá)
                                         </div>
                                         <p className="product-description">
                                             {product.description}
@@ -188,13 +188,13 @@ const DetailProduct = () => {
                                 </div>
                             </div>
                             <div className="box_1">
-                                <div className="box-header">description</div>
+                                <div className="box-header">Mô tả</div>
                                 <div className="product-detail-description">
                                     <button
                                         className="btn-flat btn-hover btn-view-description"
                                         id="view-all-description"
                                     >
-                                        view all
+                                        Xem tất cả
                                     </button>
                                     <div className="product-detail-description-content">
                                         <p>{product.description}</p>
@@ -202,7 +202,7 @@ const DetailProduct = () => {
                                 </div>
                             </div>
                             <div className="box">
-                                <div className="box-header">review</div>
+                                <div className="box-header">Đánh giá</div>
                                 <div>
                                     {product.reviews &&
                                         product.reviews.map((review, i) => (
@@ -268,7 +268,7 @@ const DetailProduct = () => {
                             </div>
                             <div className="box">
                                 <div className="box-header">
-                                    related products
+                                    Sản phẩm tương tự
                                 </div>
                                 <div
                                     className="row"
